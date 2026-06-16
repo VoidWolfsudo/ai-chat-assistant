@@ -1,0 +1,15 @@
+import { prisma } from "@/lib/prisma";
+export async function GET() {
+    const conversations = await prisma.conversation.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
+        select: {
+            id: true,
+            title: true,
+            createdAt: true,
+        },
+    });
+
+    return Response.json(conversations);
+}
